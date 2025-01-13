@@ -109,68 +109,68 @@ def render_operations_dashboard(data: pd.DataFrame):
     st.write("Top 5 States with the Highest Predicted Increase in Violent Crime Rate:")
     st.table(top_increase[['state_name', 'increase']])
 
-    st.subheader("Data Analysis Assistant")
+    # st.subheader("Data Analysis Assistant")
     
-    predefined_questions = [
-        "Which states have the highest potential for cost reduction?",
-        "Where should we focus our efforts to reduce violent crimes?",
-        "What is the relationship between investment in security and crime rates?",
-        "How can we optimize resource allocation to maximize security?",
-        "Which states need more attention based on predictions for next year?",
-        "How does the model's accuracy affect our resource allocation decisions?",
-        "What factors have the greatest influence on the violent crime rate, according to the model?"
-    ]
+    # predefined_questions = [
+    #     "Which states have the highest potential for cost reduction?",
+    #     "Where should we focus our efforts to reduce violent crimes?",
+    #     "What is the relationship between investment in security and crime rates?",
+    #     "How can we optimize resource allocation to maximize security?",
+    #     "Which states need more attention based on predictions for next year?",
+    #     "How does the model's accuracy affect our resource allocation decisions?",
+    #     "What factors have the greatest influence on the violent crime rate, according to the model?"
+    # ]
 
-    # Save the selected question in session state
-    if 'selected_question' not in st.session_state:
-        st.session_state.selected_question = "Which states have the highest potential for cost reduction?"
+    # # Save the selected question in session state
+    # if 'selected_question' not in st.session_state:
+    #     st.session_state.selected_question = "Which states have the highest potential for cost reduction?"
     
-    selected_question = st.selectbox("Select a predefined question or type your own:", 
-                                     [""] + predefined_questions, index=predefined_questions.index(st.session_state.selected_question))
+    # selected_question = st.selectbox("Select a predefined question or type your own:", 
+    #                                  [""] + predefined_questions, index=predefined_questions.index(st.session_state.selected_question))
 
-    user_question = st.text_input("Your question:", value=selected_question)
+    # user_question = st.text_input("Your question:", value=selected_question)
 
-    if st.button("Submit Question"):
-        if user_question:
-            st.write("Communicating with Grok...")
-            st.write(f"Question received: {user_question}")
+    # if st.button("Submit Question"):
+    #     if user_question:
+    #         st.write("Communicating with Grok...")
+    #         st.write(f"Question received: {user_question}")
             
-            # swap with getting images that Ale added
+    #         # swap with getting images that Ale added
 
-            # local
-            # images = [
-            #     base64.b64encode(open("./assets/massachussets/budget_massachussets_2020.png", "rb").read()).decode("utf-8"),
-            #     base64.b64encode(open("./assets/massachussets/budget_massachussets_2021.png", "rb").read()).decode("utf-8"),
-            #     base64.b64encode(open("./assets/massachussets/budget_massachussets_2022.png", "rb").read()).decode("utf-8"),
-            #     base64.b64encode(open("./assets/massachussets/budget_massachussets_2023.png", "rb").read()).decode("utf-8"),
-            #     base64.b64encode(open("./assets/massachussets/budget_massachussets_2024.png", "rb").read()).decode("utf-8"),
-            #     base64.b64encode(open("./assets/maryland/budget_maryland_2020.png", "rb").read()).decode("utf-8"),
-            #     base64.b64encode(open("./assets/maryland/budget_maryland_2021.png", "rb").read()).decode("utf-8"),
-            #     base64.b64encode(open("./assets/maryland/budget_maryland_2022.png", "rb").read()).decode("utf-8"),
-            #     base64.b64encode(open("./assets/maryland/budget_maryland_2023.png", "rb").read()).decode("utf-8"),
-            #     base64.b64encode(open("./assets/maryland/budget_maryland_2024.png", "rb").read()).decode("utf-8"),
-            #     base64.b64encode(open("./assets/idaho/budgets_idaho.png", "rb").read()).decode("utf-8"),
-            # ]
+    #         # local
+    #         # images = [
+    #         #     base64.b64encode(open("./assets/massachussets/budget_massachussets_2020.png", "rb").read()).decode("utf-8"),
+    #         #     base64.b64encode(open("./assets/massachussets/budget_massachussets_2021.png", "rb").read()).decode("utf-8"),
+    #         #     base64.b64encode(open("./assets/massachussets/budget_massachussets_2022.png", "rb").read()).decode("utf-8"),
+    #         #     base64.b64encode(open("./assets/massachussets/budget_massachussets_2023.png", "rb").read()).decode("utf-8"),
+    #         #     base64.b64encode(open("./assets/massachussets/budget_massachussets_2024.png", "rb").read()).decode("utf-8"),
+    #         #     base64.b64encode(open("./assets/maryland/budget_maryland_2020.png", "rb").read()).decode("utf-8"),
+    #         #     base64.b64encode(open("./assets/maryland/budget_maryland_2021.png", "rb").read()).decode("utf-8"),
+    #         #     base64.b64encode(open("./assets/maryland/budget_maryland_2022.png", "rb").read()).decode("utf-8"),
+    #         #     base64.b64encode(open("./assets/maryland/budget_maryland_2023.png", "rb").read()).decode("utf-8"),
+    #         #     base64.b64encode(open("./assets/maryland/budget_maryland_2024.png", "rb").read()).decode("utf-8"),
+    #         #     base64.b64encode(open("./assets/idaho/budgets_idaho.png", "rb").read()).decode("utf-8"),
+    #         # ]
 
-            # production
-            images = [
-                base64.b64encode(open("crime_dashboard/assets/massachussets/budget_massachussets_2020.png", "rb").read()).decode("utf-8"),
-                base64.b64encode(open("crime_dashboard/assets/massachussets/budget_massachussets_2021.png", "rb").read()).decode("utf-8"),
-                base64.b64encode(open("crime_dashboard/assets/massachussets/budget_massachussets_2022.png", "rb").read()).decode("utf-8"),
-                base64.b64encode(open("crime_dashboard/assets/massachussets/budget_massachussets_2023.png", "rb").read()).decode("utf-8"),
-                base64.b64encode(open("crime_dashboard/assets/massachussets/budget_massachussets_2024.png", "rb").read()).decode("utf-8"),
-                base64.b64encode(open("crime_dashboard/assets/maryland/budget_maryland_2020.png", "rb").read()).decode("utf-8"),
-                base64.b64encode(open("crime_dashboard/assets/maryland/budget_maryland_2021.png", "rb").read()).decode("utf-8"),
-                base64.b64encode(open("crime_dashboard/assets/maryland/budget_maryland_2022.png", "rb").read()).decode("utf-8"),
-                base64.b64encode(open("crime_dashboard/assets/maryland/budget_maryland_2023.png", "rb").read()).decode("utf-8"),
-                base64.b64encode(open("crime_dashboard/assets/maryland/budget_maryland_2024.png", "rb").read()).decode("utf-8"),
-                base64.b64encode(open("crime_dashboard/assets/idaho/budgets_idaho.png", "rb").read()).decode("utf-8"),
-            ]
+    #         # production
+    #         images = [
+    #             base64.b64encode(open("crime_dashboard/assets/massachussets/budget_massachussets_2020.png", "rb").read()).decode("utf-8"),
+    #             base64.b64encode(open("crime_dashboard/assets/massachussets/budget_massachussets_2021.png", "rb").read()).decode("utf-8"),
+    #             base64.b64encode(open("crime_dashboard/assets/massachussets/budget_massachussets_2022.png", "rb").read()).decode("utf-8"),
+    #             base64.b64encode(open("crime_dashboard/assets/massachussets/budget_massachussets_2023.png", "rb").read()).decode("utf-8"),
+    #             base64.b64encode(open("crime_dashboard/assets/massachussets/budget_massachussets_2024.png", "rb").read()).decode("utf-8"),
+    #             base64.b64encode(open("crime_dashboard/assets/maryland/budget_maryland_2020.png", "rb").read()).decode("utf-8"),
+    #             base64.b64encode(open("crime_dashboard/assets/maryland/budget_maryland_2021.png", "rb").read()).decode("utf-8"),
+    #             base64.b64encode(open("crime_dashboard/assets/maryland/budget_maryland_2022.png", "rb").read()).decode("utf-8"),
+    #             base64.b64encode(open("crime_dashboard/assets/maryland/budget_maryland_2023.png", "rb").read()).decode("utf-8"),
+    #             base64.b64encode(open("crime_dashboard/assets/maryland/budget_maryland_2024.png", "rb").read()).decode("utf-8"),
+    #             base64.b64encode(open("crime_dashboard/assets/idaho/budgets_idaho.png", "rb").read()).decode("utf-8"),
+    #         ]
 
-            res = interact_with_data(data.describe().to_string(), images, user_question)
-            st.write(res.content)
+    #         res = interact_with_data(data.describe().to_string(), images, user_question)
+    #         st.write(res.content)
             
-            # Save the selected question to session state
-            st.session_state.selected_question = selected_question
-        else:
-            st.warning("Please select or type a question.")
+    #         # Save the selected question to session state
+    #         st.session_state.selected_question = selected_question
+    #     else:
+    #         st.warning("Please select or type a question.")
